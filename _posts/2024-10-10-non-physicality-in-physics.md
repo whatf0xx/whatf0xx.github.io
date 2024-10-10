@@ -28,4 +28,4 @@ Anyway, the initial objective was simple enough: collect a large number (say, a 
 at the time elapsed between each. Bin the elapsed times into some sort of histogram and then check that the distribution
 has the expected shape. To jump the gun to when this later worked out, this is what we were going for:
 
-![good distribution, not what we expected]({{ site.baseurl }}/images/successful_times_dist.png)
+![good distribution, not what we expected]({{ site.baseurl }}assets/images/successful_times_dist.png)
