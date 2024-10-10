@@ -1,5 +1,4 @@
 ---
-layout: post
 topic: econophysics
 ---
 # Here is another blog post

@@ -1,4 +1,5 @@
 ---
+name: Econophysics
 background: economics
 level: everyone
 ---

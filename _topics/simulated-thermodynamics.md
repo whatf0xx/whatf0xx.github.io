@@ -1,4 +1,5 @@
 ---
+name: Simulated thermodynamics
 background: physics
 level: undergrad
 ---
