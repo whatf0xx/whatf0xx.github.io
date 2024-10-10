@@ -1,0 +1,16 @@
+---
+layout: default
+title: Topics
+---
+<h1>Topics</h1>
+
+<ul>
+  {% for topic in site.topics %}
+    <li>
+      <h2>This might not render: {{ topic.name }}</h2>
+      <h3>{{ topic.background }}</h3>
+      <h3>{{ topic.level }}</h3>
+      <p>{{ topic.content | markdownify }}</p>
+    </li>
+  {% endfor %}
+</ul>
