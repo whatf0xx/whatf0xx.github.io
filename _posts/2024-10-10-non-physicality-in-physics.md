@@ -29,3 +29,18 @@ at the time elapsed between each. Bin the elapsed times into some sort of histog
 has the expected shape. To jump the gun to when this later worked out, this is what we were going for:
 
 ![good distribution, not what we expected]({{ site.url }}{{ site.baseurl }}/assets/images/successful_times_dist.png)
+
+*Ok, that's not a Poisson distribution, but this is science so we roll with the punches.*
+
+Although the behaviour for low times isn't what we expected, the behaviour in the tail is heuristically correct, as in it's very
+rare indeed for a lot of time to pass with no collisions taking place. What is interesting for now is the behaviour I observed
+when I first ran this simulation to count the collision times:
+
+![what's going on here, then?]({{ site.url }}{{ site.baseurl }}/assets/images/four_balls_times_dist.png) 
+
+Apparently, a **huge** number of collisions are occuring with exactly the same time in between. Given that the dynamics of
+the simulation are pretty stochastic and constantly changing, this is really weird. What's even more strange is that this
+oddity is superimposed on top of what otherwise looks like quite a sensible distribution of times (we even recover *some* sort
+of Poissonian shape). So, what gives?
+
+## Detective Work
