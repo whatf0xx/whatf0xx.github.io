@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Non-physicality in Physics Simulations"
-date:   2024-10-10 14:44:33 +0200
+title:  "Under Pressure"
+date:   2024-10-15 14:44:33 +0200
 categories: simulation physics thermodynamics mechanics
 ---
 # Under Pressure
