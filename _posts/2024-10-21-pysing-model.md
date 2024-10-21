@@ -118,5 +118,19 @@ will be quite happy with what they represent!
 
 Here is the Boltzmann distribution for a given system microstate in the absence of information about the system's other properties:
 
-$$ p(\{s_i\}) = \frac{e^{-\Beta U(\{s_i\})}}{Z}
+$$ p(\{s_i\}) = \frac{e^{-\Beta U(\{s_i\})}}{Z} $$
 
+Here, *Z* is the partition function, which is generaly incredibly important for physical calculations but doesn't add anything to
+this simulation, so we will henceforth basically ignore it by multiplying through the whole equation by a factor of *Z* and treating
+it as a constant after that (which is true, at least, it won't vary with the changes to the microstates that we will be making).
+$$ \Beta $$ is the inverse temperature, which physicists use to avoid writing `frac{}{}` too much in LaTeX documents.
+
+### The Plan
+
+Generating an initial micrstate is easy: we can just start with the spins totally randomised. Then, what we want is some way to
+transform our naive system into one that represents a physical reality: in this case, one that exists with maximum probability.
+Looking at the expression for the Boltzmann distribution above, there is no reason that we can't just differentiate it with respect
+to all the spins of the system, to see how the probability would change if that spin were to change. In a line, we calculate this
+derivative:
+
+$$ \nabla p(\textbf{s}) = $$
