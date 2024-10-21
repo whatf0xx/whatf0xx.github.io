@@ -29,8 +29,24 @@ undergrad and returned with two pieces of information that would prove key:
 
 ### 1. The Ising model master equation
 
-$$ U = -J\sum_<ij>{s_i s_j} - H\sum_i{s_i} $$
+$$ U = -J\sum_{<ij>}{s_i s_j} - H\sum_i{s_i} $$
 
 I am never one much for mathematical sentimentality, but I *do* like when a Hamiltonian tells you everything you need to know
 about a system in such a clear way. Here, we are describing the system energy, *U*, in terms of all of the individual spins,
-the $s_i$s.
+the $$s_i$$s. There is immediately something quite satisfying about this to me, because we are going from a totally microscopic
+approach (examining all the individual spins/domains in a lump of magnet) and arriving at a value for the energy of the whole
+lump. Pretty cool.
+
+Each spin can have a value of plus or minus one, depending on if it's facing up or down. Then, what the Hamiltonian tells us is this:
+
+#### The right-hand term
+
+*(You didn't skip, we started on this side for a reason)*
+
+Remeber watching metal flakes line up with the field lines on a bar magnet back in high school? This is what we are looking at
+here. For each spin in the magnet, we check if it's aligned with an external field (*H*) or anti-aligned. Aligned is a
+low-energy configuration, corresponding to $$s_i = 1$$, and the system energy decreasing, whereas the anti-aligned case will
+correspond to $$s_i = -1$$, and the system energy increasing, each time by a step of *H*. Overall, this term tells us how well
+aligned the domains of the magnet are with an external magnetic field.
+
+#### The left-hand term
