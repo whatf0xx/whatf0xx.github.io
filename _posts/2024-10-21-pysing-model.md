@@ -118,12 +118,12 @@ will be quite happy with what they represent!
 
 Here is the Boltzmann distribution for a given system microstate in the absence of information about the system's other properties:
 
-$$ p(\{s_i\}) = \frac{e^{-\Beta U(\{s_i\})}}{Z} $$
+$$ p(\{s_i\}) = \frac{e^{-\beta U(\{s_i\})}}{Z} $$
 
 Here, *Z* is the partition function, which is generaly incredibly important for physical calculations but doesn't add anything to
 this simulation, so we will henceforth basically ignore it by multiplying through the whole equation by a factor of *Z* and treating
 it as a constant after that (which is true, at least, it won't vary with the changes to the microstates that we will be making).
-$$ \Beta $$ is the inverse temperature, which physicists use to avoid writing `frac{}{}` too much in LaTeX documents.
+$$ \beta $$ is the inverse temperature, which physicists use to avoid writing `frac{}{}` too much in LaTeX documents.
 
 ### The Plan
 
@@ -133,4 +133,10 @@ Looking at the expression for the Boltzmann distribution above, there is no reas
 to all the spins of the system, to see how the probability would change if that spin were to change. In a line, we calculate this
 derivative:
 
-$$ \nabla p(\textbf{s}) = $$
+$$ Z \dot \nabla p(\textbf{s}) = \sum_i{\beta (H + J \sum_{i \subset n_i}{s_i}) \dot p(\textbf{s}) \textbf{\hat{s_i}}}$$
+
+I changed from working over a set of spins, $$\{s_i\}$$ to a vector to reflect that we are working in a vector space where we want
+to push and pull spin values to see what gives us the best probability. The sum over the *i*s within this $$n_i$$ means all the
+spins that are nearest-neighbour to *i*. I think this calculation has a pleasing result, because it sort of shows us that the
+probability of a state gets better in the same direction as the local 'force' working on each spin: if we move in the direction
+to line the spin up with the external field as well as its neighbours, the probability of the state increases.
