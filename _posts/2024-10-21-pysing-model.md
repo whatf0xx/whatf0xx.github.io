@@ -133,10 +133,18 @@ Looking at the expression for the Boltzmann distribution above, there is no reas
 to all the spins of the system, to see how the probability would change if that spin were to change. In a line, we calculate this
 derivative:
 
-$$ Z \dot \nabla p(\textbf{s}) = \sum_i{\beta (H + J \sum_{i \subset n_i}{s_i}) \dot p(\textbf{s}) \textbf{\hat{s_i}}}$$
+$$ Z \cdot \nabla p(\textbf{s}) = \sum_i{\beta (H + J \sum_{i \subset n_i}{s_i}) \cdot p(\textbf{s}) \textbf{\hat s_i}}$$
 
 I changed from working over a set of spins, $$\{s_i\}$$ to a vector to reflect that we are working in a vector space where we want
 to push and pull spin values to see what gives us the best probability. The sum over the *i*s within this $$n_i$$ means all the
 spins that are nearest-neighbour to *i*. I think this calculation has a pleasing result, because it sort of shows us that the
 probability of a state gets better in the same direction as the local 'force' working on each spin: if we move in the direction
 to line the spin up with the external field as well as its neighbours, the probability of the state increases.
+
+What we also see is that this local force is mediated by the inverse temperature: if $$\beta$$ decreases (the system gets hotter)
+then the force moving us to a more probable state reduces, and we stay in our initial configuration (more on this in the next
+section).
+
+### Thermal Fluctuations and turning this into code
+
+
