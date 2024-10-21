@@ -4,8 +4,6 @@ title:  "The Pysing Model"
 date:   2024-10-21 09:35:00 +0200
 categories: simulation physics thermodynamics ising
 ---
-# The *Py*sing Model
-
 ## Motivation
 
 Back in undergrad Physics I really enjoyed the courses in statistical mechanics, and I think a large part of that was due to the
@@ -43,10 +41,82 @@ Each spin can have a value of plus or minus one, depending on if it's facing up 
 
 *(You didn't skip, we started on this side for a reason)*
 
-Remeber watching metal flakes line up with the field lines on a bar magnet back in high school? This is what we are looking at
+Remember watching metal flakes line up with the field lines on a bar magnet back in high school? This is what we are looking at
 here. For each spin in the magnet, we check if it's aligned with an external field (*H*) or anti-aligned. Aligned is a
 low-energy configuration, corresponding to $$s_i = 1$$, and the system energy decreasing, whereas the anti-aligned case will
 correspond to $$s_i = -1$$, and the system energy increasing, each time by a step of *H*. Overall, this term tells us how well
 aligned the domains of the magnet are with an external magnetic field.
 
 #### The left-hand term
+
+The left-hand term is more interesting, as it describes the spin-spin interactions within the magnet. In reality, each spin
+'feels' the influence of every other spin - they all want to line up, in the absence of anything else going on (check: if 
+$$s_i = s_j$$, how does this affect the system energy?). However, considering the interactions of every spin with every other
+spin would lead to a vastly complicated calculation. As close-by interactions dominate compared to further away ones, we simplify
+by only considering *nearest-neighbour* interactions: this is what is denoted by the *<ij>* under the sum. In terms of making a
+simulated model, this simplifies things, too, because we have a well-defined way of working out these interaction terms: for each
+spin, we just have to know which spins are closest to it in the system in order to calculate the interaction energy term. Finally,
+*J* gives a scale to the interactions: we assume that they are the same in every direction (isotropic) and the same everywhere in
+the magnet (homogeneous) so we can just use a single coefficient to characterist the internal interactions: *J*.
+
+### 2. Minimising the system's Free Energy
+
+Unlike systems that we study in 'cold' mechanics, in thermodynamics and statistical physics we are not interested in simply
+minimising a system's energy. For any given configuration of a system's macroscopic properties (its energy, pressure, temperature,
+magnetism, or even shape) there might exist a huge number of configurations of the system's microstates (what the atoms within
+it are actually doing). Temperature is not such an easy thing to define, but one way of looking at it is in terms of how well a
+system obeys simple laws about energy conservation: at 0 temperature, a system might not sit solely in a ground state, but the
+state it sits in should be perfectly predictable from the system's energy. By contrast, at higher temperature, 'thermal
+fluctuations' allow a system to occasionally work against energy conservation, sitting in a more evenly distributed set of energy
+states than satifying the Hamiltonian might have allowed. So it is with our Ising model: although just minimisng the Hamiltonian
+would lead to a magnet where all the spins were aligned with each other (and an external magnetic field, if it is present) always,
+this is in reality not what we observe: magnets don't always behave as perfect, infinitely strong ferromagnets, and importantly
+at *high temperatures* their magnetism degrades. Taken in view of statistical physics, we can explain this: although the minimum
+eneryg state always wants perfect domain alignment, thermal fluctuations leads to pockets of domain misalignment which reduce the
+system's magnetisation.
+
+The way physicists treat statistical systems is hence by minimising the Free Energy, usually given by *H*, but here given by *V*,
+so that it isn't confused with the external field *H*, above:
+
+$$ V = U - TS $$
+
+Now, if we try and minimise this quantity, we have to take into consideration the temperature *T* and the entropy *S*, described
+below. Note first that we haven't totally changed what we are doing: at low temperatures, the second term in the free energy is
+going to be less important and we basically get back to minimising the energy. As such, at low temperatures, systems go back to
+behaving like they do in models that don't consider temperature, and just minimise the system energy.
+
+On the other hand, at high temperatures, we have to consider this new term, which considers the system entropy. Entropy is a
+quantity of macroscopic systems at a given **macroscopic** configuration (i.e. we know the system's energy, pressure,
+magnetisation) which describes the uncertainty in the microscopic configuration this might correspond to. In general, this is
+linked to the number of microscopic configurations that could correspond to the given macrostate. As such, for macrostates that
+can be defined by only a small number of microstates (such as a very high magnetisation ferromagnet, where all the spins must be
+aligned, leaving only the possibilities that they all align with an external field or all anti-align with it) the entropy is low,
+whereas for macrostates which could correspond to a large number of microstates (low magnetisation where all we know is that all
+the many spins sum to 0, in potentially a huge number of ways) the entropy is high.
+
+This then gives us an indication of how our magnetic system is going to behave: when the temperature is high and hence we have
+to take the right-hand term into account, we have to *maximise* the entropy in order to reduce the free energy over all. Hence,
+at high temperatures, we favour macrostates with lots of microstates, such as low magnetisation.
+
+### Back to Simulating pretty patterns
+
+Phew, thanks for your patience. Initially, then, I thought that I would be able to come up with states that did a good job of
+minimising the system's free energy. The trouble is, what I really wanted to do was to make pretty pictures of Ising model 
+*microstates*, for which the free energy is totally undefined; to reiterate, the free energy is a property of a macroscopic
+system, which doesn't care about the microscopic configuration, it only cares about the *number* of microscopic configurations
+corresponding to the macroscopic properties.
+
+Just as this lead seemed to dry up, the other (slightly less loved, I reckon) child of statistical physics appeared to the rescue:
+
+### the Boltzmann Distribution
+
+The Boltzmann distribution is the probability of finding a system in a given *microstate*, given some assumptions about the
+isolation of the system and its macroscopic properties. Because it actually concerned system microstates, it immediately promised
+to be a better lead for my simulation than the system free energy. Additionally, working with probabilities is nice: I don't know
+exactly how my states should look, but if I can make them 'maximum probability' states according to a physical model I trust, I
+will be quite happy with what they represent!
+
+Here is the Boltzmann distribution for a given system microstate in the absence of information about the system's other properties:
+
+$$ p(\{s_i\}) = \frac{e^{-\Beta U(\{s_i\})}}{Z}
+

@@ -4,8 +4,6 @@ title:  "Under Pressure"
 date:   2024-10-15 14:44:33 +0200
 categories: simulation physics thermodynamics mechanics
 ---
-# Under Pressure
-
 ## Finding Time
 
 The first thing I wanted to achieve before really diving into taking measurements was to establish a way to measure over a
